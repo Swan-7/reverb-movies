@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchReducer from "./search";
+import moviesReducer from "./moviesSlice";
 
+// Create a redux store
 const store = configureStore({
-    reducer: {
-        search: searchReducer
-    }
+  reducer: {
+    movies: moviesReducer,
+  },
 });
 
 export default store;
