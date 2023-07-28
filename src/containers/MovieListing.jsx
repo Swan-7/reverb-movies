@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Slider from "react-slick";
 import MovieCard from "./MovieCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -13,12 +14,47 @@ import {
 } from "../redux/moviesSlice";
 
 const MovieListing = () => {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 6,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   const dispatch = useDispatch();
   const {
     trendingMovies,
     topRatedMovies,
     actionMovies,
-    comdedyMovies, 
+    comdedyMovies,
     horrorMovies,
     romanceMovies,
     documentaries,
@@ -35,7 +71,6 @@ const MovieListing = () => {
     dispatch(fetchDocumentaries());
   }, [dispatch]);
 
-
   const renderMovies = (movies, statusCode, isLargeRow) => {
     return statusCode === 200 && movies.length > 0 ? (
       movies.map((movie, index) => (
@@ -43,62 +78,73 @@ const MovieListing = () => {
       ))
     ) : (
       <div>
-        <h3>{movies.error}</h3>
+        <h3>{movies?.error ?? "Loading..."}</h3>
       </div>
     );
-  }
-    
+  };
 
   return (
     <>
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Trending Now</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">TRENDING NOW</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">
+          <Slider {...settings}>
             {renderMovies(trendingMovies, statusCode, true)}
-          </div>
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Top Rated</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">TOP RATED</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(topRatedMovies, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(topRatedMovies, statusCode, false)}
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Action Movies</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">ACTION MOVIES</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(actionMovies, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(actionMovies, statusCode, false)}
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Comedy Movies</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">COMEDY MOVIES</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(comdedyMovies, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(comdedyMovies, statusCode, false)}
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Horror Movies</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">HORROR MOVIES</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(horrorMovies, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(horrorMovies, statusCode, false)}
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Romance Movies</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">ROMANCE MOVIES</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(romanceMovies, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(romanceMovies, statusCode, false)}
+          </Slider>
         </div>
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3">Documentaries</h2>
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">DOCUMENTARIES</h2>
         <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
-          <div className="flex">{renderMovies(documentaries, statusCode, false)}</div>
+          <Slider {...settings}>
+            {renderMovies(documentaries, statusCode, false)}
+          </Slider>
         </div>
       </div>
     </>
