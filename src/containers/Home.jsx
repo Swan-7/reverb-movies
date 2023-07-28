@@ -8,13 +8,11 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Get the clicked movie data from local storage
     const clickedMovieData = localStorage.getItem("clickedMovie");
     if (clickedMovieData) {
       const clickedMovie = JSON.parse(clickedMovieData);
-      // Dispatch the addClickedMovie action to store the movie data in Redux state
       dispatch(addClickedMovie(clickedMovie));
-      console.log("Clicked Movie Data:", clickedMovie);
+      // console.log("Clicked Movie Data:", clickedMovie);
     }
   }, [dispatch]);
 

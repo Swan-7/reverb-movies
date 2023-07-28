@@ -9,7 +9,6 @@ export const fetchTrendingMovies = createAsyncThunk(
     const fetchUrl = requests.fetchTrending;
     const request = await axios.get(fetchUrl);
     const { data, status } = request;
-    console.log(data)
     return { data, statusCode: status };
   }
 );

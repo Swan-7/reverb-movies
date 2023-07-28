@@ -96,7 +96,6 @@ const MovieDetails = () => {
   const similarMovies = genres?.filter((genre) =>
     movieDetail.genres.some((movieGenre) => movieGenre.id === genre.id)
   );
-  console.log(similarMovies);
   
   const [loading, setLoading] = useState(true);
 
