@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../apis/MovieApi";
+import axios from "../apis/movieApi";
 import requests from "../apis/movieApiKey";
 import { API_KEY } from "../apis/movieApiKey";
 
