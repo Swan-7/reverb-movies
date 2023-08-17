@@ -12,7 +12,6 @@ const Home = () => {
     if (clickedMovieData) {
       const clickedMovie = JSON.parse(clickedMovieData);
       dispatch(addClickedMovie(clickedMovie));
-      // console.log("Clicked Movie Data:", clickedMovie);
     }
   }, [dispatch]);
 

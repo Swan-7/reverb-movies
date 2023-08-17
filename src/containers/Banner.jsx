@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { fetchTrendingMovies, getAllMovies } from "../redux/moviesSlice";
 
 const Banner = () => {
@@ -30,13 +32,27 @@ const Banner = () => {
     <header>
       {randomMovie && (
         <div style={bannerStyle}>
-          <div className="absolute bottom-8 text-xs w-1/3 ml-24">
-            <h1 className="font-black text-3xl mb-8">
+          <div className="absolute inset-0 bg-blue-600 opacity-50"></div>
+          <div className="absolute bottom-16 text-md w-1/2 ml-6">
+            <div className="bg-slate-100/50 w-24 rounded-2xl text-center text-sm">
+              New Movie
+            </div>
+            <h1 className="font-semibold text-4xl mb-4 mt-2">
               {randomMovie?.title ||
                 randomMovie?.name ||
                 randomMovie?.original_name}
             </h1>
             <h3>{randomMovie.overview}</h3>
+            <div>
+              <button className="bg-white text-black rounded-3xl px-5 py-2 mt-6">
+                <PlayArrowIcon sx={{ fontSize: 20 }} />
+                <span className="ml-1 mt-0.5">Watch Movie</span>
+              </button>
+              <button className="text-white border rounded-3xl px-5 py-2 mt-6 ml-4 text-center">
+                <span className="mr-1 mt-0.5">More Info</span>
+                <ArrowForwardIcon sx={{ fontSize: 16 }} />
+              </button>
+            </div>
           </div>
         </div>
       )}

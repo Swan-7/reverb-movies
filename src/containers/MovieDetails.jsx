@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import LanguageIcon from "@mui/icons-material/Language";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchMovieDetail,
@@ -13,7 +16,7 @@ import movieTrailer from "movie-trailer";
 import Youtube from "react-youtube";
 
 const MovieDetails = () => {
-  const base_url = "https://image.tmdb.org/t/p/w300";
+  const base_url = "https://image.tmdb.org/t/p/w500";
   const base_url_2 = "https://image.tmdb.org/t/p/original";
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -21,6 +24,12 @@ const MovieDetails = () => {
   const { movieDetail, genres } = useSelector(getAllMovies);
   const backgroundImageUrl = `${base_url_2}${data.backdrop_path}`;
   const [trailerUrl, setTrailerUrl] = useState("");
+  
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   const bannerStyle = {
     backgroundImage: `url(${backgroundImageUrl})`,
@@ -65,11 +74,20 @@ const MovieDetails = () => {
     ],
   };
 
+  const convertToHoursMinutes = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    return [hours, remainingMinutes];
+  }
+
+  const movieDurationMinutes = data.runtime;
+  const [hours, minutes] = convertToHoursMinutes(movieDurationMinutes);
+
+
   const opts = {
     height: "390",
     width: "640",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 1,
     },
   };
@@ -93,6 +111,8 @@ const MovieDetails = () => {
     }
   };
 
+  const percentage = (data.vote_average / 10) * 100;
+
   const similarMovies = genres?.filter((genre) =>
     movieDetail.genres.some((movieGenre) => movieGenre.id === genre.id)
   );
@@ -111,7 +131,7 @@ const MovieDetails = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div>
+        <div className="mb-12">
           <div
             className="relative bg-no-repeat mb-12 md-block"
             style={bannerStyle}
@@ -122,23 +142,33 @@ const MovieDetails = () => {
 
           <div className="md:flex flex-col">
             <div className="md:shrink-0">
-              <div className=" md:absolute md:top-24 flex mx-auto md:left-64 text-sm z-999">
-                <div className="w-full h-full">
+              <div className=" md:absolute md:top-24 flex mx-auto md:left-16 text-sm z-999">
+                <div className="w-full h-full relative inline-block overflow-hidden">
                   <img
                     onClick={handleClick}
-                    className="rounded-3xl mx-auto lg:mx-0"
+                    className="rounded-3xl mx-auto lg:mx-0 w-2/3 transition-transform"
                     src={`${base_url}${data.poster_path}`}
                     alt={data.title}
                   />
+                  <div className="absolute inset-0 bg-gray-600 cursor-pointer rounded-3xl opacity-0 flex items-center justify-center transition-opacity hover:opacity-50 w-2/3">
+                    <p className="text-white text-lg px-4 py-2 border rounded-lg">Watch Trailer</p>
+                  </div>
                 </div>
               </div>
 
-              <div className="absolute md:top-40 top-0 flex left-0 md:left-[37rem] text-sm mt-auto">
+              <div className="absolute md:top-24 top-0 flex left-0 md:left-[27rem] text-sm mt-auto">
                 <div className="flex flex-col gap-4 mt-24">
                   <div>
-                    <h2 className="text-3xl font-extrabold mb-6">
+                    <h2 className="text-3xl font-extrabold mb-1">
                       {data.original_title}
                     </h2>
+                  </div>
+                  <div className="flex gap-x-4">
+                    <div className="border border-slate-400/100 w-16 text-center text-slate-400/100 rounded-sm">
+                      {data.adult ? <p>Adult</p> : <p>PG-13</p>}
+                    </div>
+                    <span className="font-light">{data.release_date}</span>
+                    <span>{`${hours}h ${minutes}m`}</span>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="">
@@ -154,24 +184,61 @@ const MovieDetails = () => {
                           </span>
                         ))}
                     </span>
-                    <div className="flex flex-col mt-8 gap-0.5">
-                      <span className="font-extrabold">
-                        Tagline: <br />
-                        <span className="font-light">{data.tagline}</span>
-                      </span>
-                      <span className="font-extrabold">
-                        Duration: <br />
-                        <span className="font-light">{data.runtime}</span>
-                      </span>
-                      <span className="font-extrabold">
-                        Release Date: <br />
-                        <span className="font-light">{data.release_date}</span>
+
+                    <div className="flex items-center gap-x-20 mb-6">
+                      <div className="flex items-center">
+                        <div className="bg-slate-800 p-[0.3rem] rounded-full w-[4.3rem]">
+                          <div
+                            style={{
+                              background: `conic-gradient(rgb(56 189 248) ${percentage}%, rgb(71 85 105) ${percentage}%)`,
+                            }}
+                            className="w-[3.5rem] h-[3.5rem] flex items-center justify-center rounded-full"
+                          >
+                            <div className="text-xl font-semibold w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:text-[#A45C40]">
+                              {Math.floor(percentage)}
+                              <span className="text-[0.7rem]">
+                                %
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <span className="text-[1.1rem] font-semibold ml-2 w-4">
+                          Vote Average
+                        </span>
+                      </div>
+
+                      <div className="flex gap-x-6">
+                        <a
+                          href={data.homepage}
+                          className="bg-slate-800 p-2 rounded-full"
+                        >
+                          <LanguageIcon />
+                        </a>
+                        <button
+                          className="cursor-pointer bg-slate-800 p-2 rounded-full"
+                          onClick={handleFavoriteClick}
+                        >
+                          {isFavorite ? (
+                            <FavoriteIcon />
+                          ) : (
+                            <FavoriteBorderIcon />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-0.5">
+                      <span className="italic">
+                        <span className="font-light text-md opacity-80">
+                          {data.tagline}
+                        </span>
                       </span>
                     </div>
                   </div>
-                  <div className=" font-extrabold">
+                  <div className=" font-extrabold text-lg">
                     Overview: <br />
-                    <span className="font-light">{data.overview}</span>
+                    <span className="font-light text-sm block w-1/2">
+                      {data.overview}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -188,8 +255,9 @@ const MovieDetails = () => {
             )}
           </div>
 
-          
-      <button onClick={handleMovieClick} className="hidden">Add to Local Storage</button>
+          <button onClick={handleMovieClick} className="hidden">
+            Add to Local Storage
+          </button>
 
           <h3 className="hidden">Similar Movies</h3>
           {similarMovies?.length > 0 ? (

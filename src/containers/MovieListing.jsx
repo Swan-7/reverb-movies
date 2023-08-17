@@ -86,8 +86,8 @@ const MovieListing = () => {
   return (
     <>
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">TRENDING NOW</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Trending Now</h2>
+        <div className="mx-3 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(trendingMovies, statusCode, true)}
           </Slider>
@@ -95,8 +95,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">TOP RATED</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Top Rated</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(topRatedMovies, statusCode, false)}
           </Slider>
@@ -104,8 +104,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">ACTION MOVIES</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Action Movies</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(actionMovies, statusCode, false)}
           </Slider>
@@ -113,8 +113,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">COMEDY MOVIES</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Comedy Movies</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(comdedyMovies, statusCode, false)}
           </Slider>
@@ -122,8 +122,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">HORROR MOVIES</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Horror Movies</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(horrorMovies, statusCode, false)}
           </Slider>
@@ -131,8 +131,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">ROMANCE MOVIES</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Romance Movies</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(romanceMovies, statusCode, false)}
           </Slider>
@@ -140,8 +140,8 @@ const MovieListing = () => {
       </div>
 
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">DOCUMENTARIES</h2>
-        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-4">
+        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Documentaries</h2>
+        <div className="mx-5 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(documentaries, statusCode, false)}
           </Slider>
