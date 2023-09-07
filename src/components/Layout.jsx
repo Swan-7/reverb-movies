@@ -12,6 +12,7 @@ const darkTheme = createTheme({
 })
 
 const Layout = ({children}) => {
+
   return (
     <ThemeProvider theme={darkTheme}>
         <CssBaseline/>

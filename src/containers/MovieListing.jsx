@@ -71,7 +71,19 @@ const MovieListing = () => {
     dispatch(fetchDocumentaries());
   }, [dispatch]);
 
+  const isLoading =
+    statusCode !== 200 ||
+    (trendingMovies.length === 0 &&
+      topRatedMovies.length === 0 &&
+      actionMovies.length === 0 &&
+      comdedyMovies.length === 0 &&
+      horrorMovies.length === 0 &&
+      romanceMovies.length === 0 &&
+      documentaries.length === 0);
+
+
   const renderMovies = (movies, statusCode, isLargeRow) => {
+
     return statusCode === 200 && movies.length > 0 ? (
       movies.map((movie, index) => (
         <MovieCard key={index} data={movie} isLargeRow={isLargeRow} />
@@ -86,7 +98,7 @@ const MovieListing = () => {
   return (
     <>
       <div className="pl-8 pt-4">
-        <h2 className="text-sky-300 mb-3 text-2xl font-bold">Trending Now</h2>
+        <h2 className={`text-sky-300 mb-3 text-2xl font-bold ${isLoading ? 'pt-32' : 'pt-0'}`}>Trending Now</h2>
         <div className="mx-3 my-0 overflow-y-hidden scrollbar-none p-6">
           <Slider {...settings}>
             {renderMovies(trendingMovies, statusCode, true)}

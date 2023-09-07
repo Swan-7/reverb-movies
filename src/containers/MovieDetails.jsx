@@ -150,8 +150,13 @@ const MovieDetails = () => {
                     src={`${base_url}${data.poster_path}`}
                     alt={data.title}
                   />
-                  <div className="absolute inset-0 bg-gray-600 cursor-pointer rounded-3xl opacity-0 flex items-center justify-center transition-opacity hover:opacity-50 w-2/3">
-                    <p className="text-white text-lg px-4 py-2 border rounded-lg">Watch Trailer</p>
+                  <div
+                    className="absolute inset-0 bg-gray-600 cursor-pointer rounded-3xl opacity-0 flex items-center justify-center transition-opacity hover:opacity-50 w-2/3
+                  transition ease-out delay-150 hover:-translate-y-1 duration-300"
+                  >
+                    <p className="text-white text-lg px-4 py-2 border rounded-lg">
+                      Watch Trailer
+                    </p>
                   </div>
                 </div>
               </div>
@@ -170,7 +175,7 @@ const MovieDetails = () => {
                     <span className="font-light">{data.release_date}</span>
                     <span>{`${hours}h ${minutes}m`}</span>
                   </div>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-6">
                     <span className="">
                       {data.genres &&
                         data.genres.slice(0, 5).map((genre, i) => (
@@ -187,7 +192,7 @@ const MovieDetails = () => {
 
                     <div className="flex items-center gap-x-20 mb-6">
                       <div className="flex items-center">
-                        <div className="bg-slate-800 p-[0.3rem] rounded-full w-[4.3rem]">
+                        <div className="bg-slate-800 p-[0.3rem] rounded-full w-[4.15rem]">
                           <div
                             style={{
                               background: `conic-gradient(rgb(56 189 248) ${percentage}%, rgb(71 85 105) ${percentage}%)`,
@@ -196,9 +201,7 @@ const MovieDetails = () => {
                           >
                             <div className="text-xl font-semibold w-12 h-12 bg-slate-800 rounded-full flex items-center justify-center group-hover:text-[#A45C40]">
                               {Math.floor(percentage)}
-                              <span className="text-[0.7rem]">
-                                %
-                              </span>
+                              <span className="text-[0.7rem]">%</span>
                             </div>
                           </div>
                         </div>

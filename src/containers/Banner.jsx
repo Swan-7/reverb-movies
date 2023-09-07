@@ -33,7 +33,7 @@ const Banner = () => {
       {randomMovie && (
         <div style={bannerStyle}>
           <div className="absolute inset-0 bg-blue-600 opacity-50"></div>
-          <div className="absolute bottom-16 text-md w-1/2 ml-6">
+          <div className="absolute bottom-12 text-md w-1/2 ml-6">
             <div className="bg-slate-100/50 w-24 rounded-2xl text-center text-sm">
               New Movie
             </div>
@@ -44,11 +44,11 @@ const Banner = () => {
             </h1>
             <h3>{randomMovie.overview}</h3>
             <div>
-              <button className="bg-white text-black rounded-3xl px-5 py-2 mt-6">
+              <button className="bg-white text-black rounded-3xl px-4 py-2 mt-6">
                 <PlayArrowIcon sx={{ fontSize: 20 }} />
                 <span className="ml-1 mt-0.5">Watch Movie</span>
               </button>
-              <button className="text-white border rounded-3xl px-5 py-2 mt-6 ml-4 text-center">
+              <button className="text-white border rounded-3xl px-5 py-2 mt-6 ml-3 text-center">
                 <span className="mr-1 mt-0.5">More Info</span>
                 <ArrowForwardIcon sx={{ fontSize: 16 }} />
               </button>
